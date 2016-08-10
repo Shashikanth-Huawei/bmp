@@ -13,10 +13,10 @@
 
 package org.onosproject.bgp.controller;
 
-import org.onosproject.bgpio.exceptions.BgpParseException;
-import org.onosproject.bgpio.protocol.BgpLSNlri;
-import org.onosproject.bgpio.protocol.linkstate.PathAttrNlriDetails;
-import org.onosproject.bgpio.types.RouteDistinguisher;
+import org.onosproject.bgp.bgpio.exceptions.BgpParseException;
+import org.onosproject.bgp.bgpio.protocol.BgpLSNlri;
+import org.onosproject.bgp.bgpio.protocol.linkstate.PathAttrNlriDetails;
+import org.onosproject.bgp.bgpio.types.RouteDistinguisher;
 
 /**
  * Abstraction of BGP local RIB.

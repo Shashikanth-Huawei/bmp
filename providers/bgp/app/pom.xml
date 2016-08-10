@@ -30,7 +30,7 @@
     <dependencies>
         <dependency>
             <groupId>org.onosproject</groupId>
-            <artifactId>onos-bgpio</artifactId>
+            <artifactId>onos-app-bgp-api</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>

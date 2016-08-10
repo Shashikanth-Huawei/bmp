@@ -15,13 +15,13 @@
  */
 package org.onosproject.bgp.controller.impl;
 
-import org.onosproject.bgpio.protocol.linkstate.PathAttrNlriDetailsLocalRib;
-import org.onosproject.bgpio.types.AsPath;
-import org.onosproject.bgpio.types.BgpValueType;
-import org.onosproject.bgpio.types.LocalPref;
-import org.onosproject.bgpio.types.Med;
-import org.onosproject.bgpio.types.Origin;
-import org.onosproject.bgpio.types.Origin.OriginType;
+import org.onosproject.bgp.bgpio.protocol.linkstate.PathAttrNlriDetailsLocalRib;
+import org.onosproject.bgp.bgpio.types.AsPath;
+import org.onosproject.bgp.bgpio.types.BgpValueType;
+import org.onosproject.bgp.bgpio.types.LocalPref;
+import org.onosproject.bgp.bgpio.types.Med;
+import org.onosproject.bgp.bgpio.types.Origin;
+import org.onosproject.bgp.bgpio.types.Origin.OriginType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

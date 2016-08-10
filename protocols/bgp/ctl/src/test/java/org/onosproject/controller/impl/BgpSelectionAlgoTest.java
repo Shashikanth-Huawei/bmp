@@ -21,15 +21,15 @@ import org.junit.Test;
 import org.onlab.packet.IpAddress;
 import org.onlab.packet.IpAddress.Version;
 import org.onosproject.bgp.controller.impl.BgpSelectionAlgo;
-import org.onosproject.bgpio.exceptions.BgpParseException;
-import org.onosproject.bgpio.protocol.linkstate.BgpNodeLSNlriVer4.ProtocolType;
-import org.onosproject.bgpio.protocol.linkstate.PathAttrNlriDetails;
-import org.onosproject.bgpio.protocol.linkstate.PathAttrNlriDetailsLocalRib;
-import org.onosproject.bgpio.types.AsPath;
-import org.onosproject.bgpio.types.BgpValueType;
-import org.onosproject.bgpio.types.LocalPref;
-import org.onosproject.bgpio.types.Med;
-import org.onosproject.bgpio.types.Origin;
+import org.onosproject.bgp.bgpio.exceptions.BgpParseException;
+import org.onosproject.bgp.bgpio.protocol.linkstate.BgpNodeLSNlriVer4.ProtocolType;
+import org.onosproject.bgp.bgpio.protocol.linkstate.PathAttrNlriDetails;
+import org.onosproject.bgp.bgpio.protocol.linkstate.PathAttrNlriDetailsLocalRib;
+import org.onosproject.bgp.bgpio.types.AsPath;
+import org.onosproject.bgp.bgpio.types.BgpValueType;
+import org.onosproject.bgp.bgpio.types.LocalPref;
+import org.onosproject.bgp.bgpio.types.Med;
+import org.onosproject.bgp.bgpio.types.Origin;
 
 import java.util.LinkedList;
 

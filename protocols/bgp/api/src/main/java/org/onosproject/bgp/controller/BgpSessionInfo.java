@@ -13,10 +13,10 @@
 
 package org.onosproject.bgp.controller;
 
-import java.util.List;
+import org.onosproject.bgp.bgpio.protocol.BgpVersion;
+import org.onosproject.bgp.bgpio.types.BgpValueType;
 
-import org.onosproject.bgpio.protocol.BgpVersion;
-import org.onosproject.bgpio.types.BgpValueType;
+import java.util.List;
 
 /**
  * Abstraction of an BGP session info. Maintian session parameters obtained during session creation.

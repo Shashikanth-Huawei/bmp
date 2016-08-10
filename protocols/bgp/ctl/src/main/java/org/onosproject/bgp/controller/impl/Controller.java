@@ -33,9 +33,9 @@ import org.jboss.netty.channel.group.DefaultChannelGroup;
 import org.jboss.netty.channel.socket.nio.NioClientSocketChannelFactory;
 import org.jboss.netty.channel.socket.nio.NioServerSocketChannelFactory;
 import org.onosproject.bgp.controller.BgpController;
-import org.onosproject.bgpio.protocol.BgpFactories;
-import org.onosproject.bgpio.protocol.BgpFactory;
-import org.onosproject.bgpio.protocol.BgpVersion;
+import org.onosproject.bgp.bgpio.protocol.BgpFactories;
+import org.onosproject.bgp.bgpio.protocol.BgpFactory;
+import org.onosproject.bgp.bgpio.protocol.BgpVersion;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

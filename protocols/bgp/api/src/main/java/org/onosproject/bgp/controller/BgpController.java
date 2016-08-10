@@ -16,8 +16,8 @@
 
 package org.onosproject.bgp.controller;
 
-import org.onosproject.bgpio.exceptions.BgpParseException;
-import org.onosproject.bgpio.protocol.BgpMessage;
+import org.onosproject.bgp.bgpio.exceptions.BgpParseException;
+import org.onosproject.bgp.bgpio.protocol.BgpMessage;
 
 import java.util.Map;
 import java.util.Set;

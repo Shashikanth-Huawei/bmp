@@ -17,8 +17,8 @@ import java.util.List;
 
 import org.onosproject.bgp.controller.BgpId;
 import org.onosproject.bgp.controller.BgpSessionInfo;
-import org.onosproject.bgpio.protocol.BgpVersion;
-import org.onosproject.bgpio.types.BgpValueType;
+import org.onosproject.bgp.bgpio.protocol.BgpVersion;
+import org.onosproject.bgp.bgpio.types.BgpValueType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

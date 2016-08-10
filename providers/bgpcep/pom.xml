@@ -52,6 +52,10 @@
             <artifactId>onos-pcepio</artifactId>
             <version>${project.version}</version>
         </dependency>
+        <dependency>
+            <groupId>org.onosproject</groupId>
+            <artifactId>onos-app-bgp-api</artifactId>
+        </dependency>
   </dependencies>
 
 </project>

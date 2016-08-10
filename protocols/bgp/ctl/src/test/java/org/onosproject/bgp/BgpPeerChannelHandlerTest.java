@@ -24,10 +24,10 @@ import org.jboss.netty.buffer.ChannelBuffers;
 import org.jboss.netty.channel.ChannelHandlerContext;
 import org.jboss.netty.channel.ChannelStateEvent;
 import org.jboss.netty.channel.SimpleChannelHandler;
-import org.onosproject.bgpio.protocol.ver4.BgpKeepaliveMsgVer4;
-import org.onosproject.bgpio.protocol.ver4.BgpOpenMsgVer4;
-import org.onosproject.bgpio.types.BgpHeader;
-import org.onosproject.bgpio.types.BgpValueType;
+import org.onosproject.bgp.bgpio.protocol.ver4.BgpKeepaliveMsgVer4;
+import org.onosproject.bgp.bgpio.protocol.ver4.BgpOpenMsgVer4;
+import org.onosproject.bgp.bgpio.types.BgpHeader;
+import org.onosproject.bgp.bgpio.types.BgpValueType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

@@ -12,8 +12,8 @@
  */
 package org.onosproject.bgp.controller;
 
-import org.onosproject.bgpio.protocol.linkstate.BgpNodeLSNlriVer4;
-import org.onosproject.bgpio.protocol.linkstate.PathAttrNlriDetails;
+import org.onosproject.bgp.bgpio.protocol.linkstate.BgpNodeLSNlriVer4;
+import org.onosproject.bgp.bgpio.protocol.linkstate.PathAttrNlriDetails;
 
 /**
  * Allows for providers interested in node events to be notified.

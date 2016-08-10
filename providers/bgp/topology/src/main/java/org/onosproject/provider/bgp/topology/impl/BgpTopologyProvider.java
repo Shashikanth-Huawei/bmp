@@ -13,53 +13,41 @@
 
 package org.onosproject.provider.bgp.topology.impl;
 
-import static org.onosproject.bgp.controller.BgpDpid.uri;
-import static org.onosproject.net.DeviceId.deviceId;
-import static org.onosproject.net.Device.Type.ROUTER;
-import static org.onosproject.net.Device.Type.VIRTUAL;
-import static org.onosproject.incubator.net.resource.label.LabelResourceId.labelResourceId;
-import static java.util.stream.Collectors.toList;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
-import java.util.HashMap;
-
-import org.onlab.packet.ChassisId;
-import org.onlab.packet.Ip4Address;
-import org.onlab.util.Bandwidth;
 import org.apache.felix.scr.annotations.Activate;
 import org.apache.felix.scr.annotations.Component;
 import org.apache.felix.scr.annotations.Deactivate;
 import org.apache.felix.scr.annotations.Reference;
 import org.apache.felix.scr.annotations.ReferenceCardinality;
+import org.onlab.packet.ChassisId;
+import org.onlab.packet.Ip4Address;
+import org.onlab.util.Bandwidth;
+import org.onosproject.bgp.bgpio.exceptions.BgpParseException;
+import org.onosproject.bgp.bgpio.protocol.linkstate.BgpLinkLSIdentifier;
+import org.onosproject.bgp.bgpio.protocol.linkstate.BgpLinkLsNlriVer4;
+import org.onosproject.bgp.bgpio.protocol.linkstate.BgpNodeLSIdentifier;
+import org.onosproject.bgp.bgpio.protocol.linkstate.BgpNodeLSNlriVer4;
+import org.onosproject.bgp.bgpio.protocol.linkstate.NodeDescriptors;
+import org.onosproject.bgp.bgpio.protocol.linkstate.PathAttrNlriDetails;
+import org.onosproject.bgp.bgpio.types.AutonomousSystemTlv;
+import org.onosproject.bgp.bgpio.types.BgpLSIdentifierTlv;
+import org.onosproject.bgp.bgpio.types.BgpValueType;
+import org.onosproject.bgp.bgpio.types.IPv4AddressTlv;
+import org.onosproject.bgp.bgpio.types.IsIsNonPseudonode;
+import org.onosproject.bgp.bgpio.types.IsIsPseudonode;
+import org.onosproject.bgp.bgpio.types.LinkLocalRemoteIdentifiersTlv;
+import org.onosproject.bgp.bgpio.types.LinkStateAttributes;
+import org.onosproject.bgp.bgpio.types.OspfNonPseudonode;
+import org.onosproject.bgp.bgpio.types.OspfPseudonode;
+import org.onosproject.bgp.bgpio.types.attr.BgpAttrNodeFlagBitTlv;
+import org.onosproject.bgp.bgpio.types.attr.BgpAttrNodeIsIsAreaId;
+import org.onosproject.bgp.bgpio.types.attr.BgpAttrRouterIdV4;
+import org.onosproject.bgp.bgpio.types.attr.BgpLinkAttrIgpMetric;
+import org.onosproject.bgp.bgpio.types.attr.BgpLinkAttrMaxLinkBandwidth;
+import org.onosproject.bgp.bgpio.types.attr.BgpLinkAttrTeDefaultMetric;
 import org.onosproject.bgp.controller.BgpController;
 import org.onosproject.bgp.controller.BgpDpid;
 import org.onosproject.bgp.controller.BgpLinkListener;
 import org.onosproject.bgp.controller.BgpNodeListener;
-import org.onosproject.bgpio.exceptions.BgpParseException;
-import org.onosproject.bgpio.protocol.linkstate.BgpLinkLSIdentifier;
-import org.onosproject.bgpio.protocol.linkstate.BgpLinkLsNlriVer4;
-import org.onosproject.bgpio.protocol.linkstate.BgpNodeLSIdentifier;
-import org.onosproject.bgpio.protocol.linkstate.BgpNodeLSNlriVer4;
-import org.onosproject.bgpio.protocol.linkstate.NodeDescriptors;
-import org.onosproject.bgpio.protocol.linkstate.PathAttrNlriDetails;
-import org.onosproject.bgpio.types.AutonomousSystemTlv;
-import org.onosproject.bgpio.types.BgpLSIdentifierTlv;
-import org.onosproject.bgpio.types.BgpValueType;
-import org.onosproject.bgpio.types.IPv4AddressTlv;
-import org.onosproject.bgpio.types.IsIsNonPseudonode;
-import org.onosproject.bgpio.types.IsIsPseudonode;
-import org.onosproject.bgpio.types.LinkLocalRemoteIdentifiersTlv;
-import org.onosproject.bgpio.types.LinkStateAttributes;
-import org.onosproject.bgpio.types.OspfNonPseudonode;
-import org.onosproject.bgpio.types.OspfPseudonode;
-import org.onosproject.bgpio.types.attr.BgpAttrNodeFlagBitTlv;
-import org.onosproject.bgpio.types.attr.BgpAttrNodeIsIsAreaId;
-import org.onosproject.bgpio.types.attr.BgpAttrRouterIdV4;
-import org.onosproject.bgpio.types.attr.BgpLinkAttrIgpMetric;
-import org.onosproject.bgpio.types.attr.BgpLinkAttrMaxLinkBandwidth;
-import org.onosproject.bgpio.types.attr.BgpLinkAttrTeDefaultMetric;
 import org.onosproject.core.CoreService;
 import org.onosproject.incubator.net.resource.label.LabelResourceAdminService;
 import org.onosproject.incubator.net.resource.label.LabelResourceId;
@@ -94,6 +82,18 @@ import org.onosproject.net.provider.AbstractProvider;
 import org.onosproject.net.provider.ProviderId;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Set;
+
+import static java.util.stream.Collectors.toList;
+import static org.onosproject.bgp.controller.BgpDpid.uri;
+import static org.onosproject.incubator.net.resource.label.LabelResourceId.labelResourceId;
+import static org.onosproject.net.Device.Type.ROUTER;
+import static org.onosproject.net.Device.Type.VIRTUAL;
+import static org.onosproject.net.DeviceId.deviceId;
 
 /**
  * Provider which uses an BGP controller to detect network infrastructure topology.

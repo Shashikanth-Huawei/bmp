@@ -28,12 +28,12 @@ import org.onosproject.bgp.controller.BgpLocalRib;
 import org.onosproject.bgp.controller.BgpNodeListener;
 import org.onosproject.bgp.controller.BgpPeer;
 import org.onosproject.bgp.controller.BgpPeerManager;
-import org.onosproject.bgpio.exceptions.BgpParseException;
-import org.onosproject.bgpio.protocol.BgpMessage;
-import org.onosproject.bgpio.protocol.BgpUpdateMsg;
-import org.onosproject.bgpio.types.BgpValueType;
-import org.onosproject.bgpio.types.MpReachNlri;
-import org.onosproject.bgpio.types.MpUnReachNlri;
+import org.onosproject.bgp.bgpio.exceptions.BgpParseException;
+import org.onosproject.bgp.bgpio.protocol.BgpMessage;
+import org.onosproject.bgp.bgpio.protocol.BgpUpdateMsg;
+import org.onosproject.bgp.bgpio.types.BgpValueType;
+import org.onosproject.bgp.bgpio.types.MpReachNlri;
+import org.onosproject.bgp.bgpio.types.MpUnReachNlri;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

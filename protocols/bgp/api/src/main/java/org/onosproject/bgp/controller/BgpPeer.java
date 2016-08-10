@@ -16,13 +16,13 @@
 package org.onosproject.bgp.controller;
 import java.util.List;
 import org.jboss.netty.channel.Channel;
-import org.onosproject.bgpio.exceptions.BgpParseException;
-import org.onosproject.bgpio.protocol.BgpFactory;
-import org.onosproject.bgpio.protocol.BgpMessage;
-import org.onosproject.bgpio.protocol.flowspec.BgpFlowSpecNlri;
-import org.onosproject.bgpio.protocol.flowspec.BgpFlowSpecRouteKey;
-import org.onosproject.bgpio.types.BgpValueType;
-import org.onosproject.bgpio.types.attr.WideCommunity;
+import org.onosproject.bgp.bgpio.exceptions.BgpParseException;
+import org.onosproject.bgp.bgpio.protocol.BgpFactory;
+import org.onosproject.bgp.bgpio.protocol.BgpMessage;
+import org.onosproject.bgp.bgpio.protocol.flowspec.BgpFlowSpecNlri;
+import org.onosproject.bgp.bgpio.protocol.flowspec.BgpFlowSpecRouteKey;
+import org.onosproject.bgp.bgpio.types.BgpValueType;
+import org.onosproject.bgp.bgpio.types.attr.WideCommunity;
 
 /**
  * Represents the peer side of an BGP peer.

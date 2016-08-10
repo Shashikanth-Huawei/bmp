@@ -19,15 +19,15 @@ package org.onosproject.bgp.controller.impl;
 import java.util.Map;
 import java.util.TreeMap;
 
-import org.onosproject.bgpio.protocol.BgpLSNlri;
-import org.onosproject.bgpio.protocol.linkstate.BgpLinkLSIdentifier;
-import org.onosproject.bgpio.protocol.linkstate.BgpLinkLsNlriVer4;
-import org.onosproject.bgpio.protocol.linkstate.BgpNodeLSIdentifier;
-import org.onosproject.bgpio.protocol.linkstate.BgpNodeLSNlriVer4;
-import org.onosproject.bgpio.protocol.linkstate.BgpPrefixIPv4LSNlriVer4;
-import org.onosproject.bgpio.protocol.linkstate.BgpPrefixLSIdentifier;
-import org.onosproject.bgpio.protocol.linkstate.PathAttrNlriDetails;
-import org.onosproject.bgpio.types.RouteDistinguisher;
+import org.onosproject.bgp.bgpio.protocol.BgpLSNlri;
+import org.onosproject.bgp.bgpio.protocol.linkstate.BgpLinkLSIdentifier;
+import org.onosproject.bgp.bgpio.protocol.linkstate.BgpLinkLsNlriVer4;
+import org.onosproject.bgp.bgpio.protocol.linkstate.BgpNodeLSIdentifier;
+import org.onosproject.bgp.bgpio.protocol.linkstate.BgpNodeLSNlriVer4;
+import org.onosproject.bgp.bgpio.protocol.linkstate.BgpPrefixIPv4LSNlriVer4;
+import org.onosproject.bgp.bgpio.protocol.linkstate.BgpPrefixLSIdentifier;
+import org.onosproject.bgp.bgpio.protocol.linkstate.PathAttrNlriDetails;
+import org.onosproject.bgp.bgpio.types.RouteDistinguisher;
 
 import com.google.common.base.MoreObjects;
 

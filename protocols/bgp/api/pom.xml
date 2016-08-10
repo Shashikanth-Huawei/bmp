@@ -31,10 +31,10 @@
     <description>ONOS BGP controller subsystem API</description>
 
     <dependencies>
-        <dependency>
+        <!--dependency>
             <groupId>org.onosproject</groupId>
             <artifactId>onos-bgpio</artifactId>
-        </dependency>
+        </dependency-->
         <dependency>
             <groupId>io.netty</groupId>
             <artifactId>netty</artifactId>
@@ -42,6 +42,11 @@
         <dependency>
             <groupId>org.onosproject</groupId>
             <artifactId>onos-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.onosproject</groupId>
+            <artifactId>onos-app-bgp-api</artifactId>
+            <version>1.7.0-SNAPSHOT</version>
         </dependency>
     </dependencies>
 </project>

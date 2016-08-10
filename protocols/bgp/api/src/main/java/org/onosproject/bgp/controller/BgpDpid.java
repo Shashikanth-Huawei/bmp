@@ -20,16 +20,16 @@ import java.net.URISyntaxException;
 import java.util.List;
 import java.util.ListIterator;
 
-import org.onosproject.bgpio.protocol.linkstate.BgpLinkLsNlriVer4;
-import org.onosproject.bgpio.protocol.linkstate.BgpNodeLSNlriVer4;
-import org.onosproject.bgpio.protocol.linkstate.NodeDescriptors;
-import org.onosproject.bgpio.types.AutonomousSystemTlv;
-import org.onosproject.bgpio.types.BgpLSIdentifierTlv;
-import org.onosproject.bgpio.types.BgpValueType;
-import org.onosproject.bgpio.types.IsIsNonPseudonode;
-import org.onosproject.bgpio.types.IsIsPseudonode;
-import org.onosproject.bgpio.types.OspfNonPseudonode;
-import org.onosproject.bgpio.types.OspfPseudonode;
+import org.onosproject.bgp.bgpio.protocol.linkstate.BgpLinkLsNlriVer4;
+import org.onosproject.bgp.bgpio.protocol.linkstate.BgpNodeLSNlriVer4;
+import org.onosproject.bgp.bgpio.protocol.linkstate.NodeDescriptors;
+import org.onosproject.bgp.bgpio.types.AutonomousSystemTlv;
+import org.onosproject.bgp.bgpio.types.BgpLSIdentifierTlv;
+import org.onosproject.bgp.bgpio.types.BgpValueType;
+import org.onosproject.bgp.bgpio.types.IsIsNonPseudonode;
+import org.onosproject.bgp.bgpio.types.IsIsPseudonode;
+import org.onosproject.bgp.bgpio.types.OspfNonPseudonode;
+import org.onosproject.bgp.bgpio.types.OspfPseudonode;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

@@ -12,9 +12,9 @@
  */
 package org.onosproject.bgp.controller;
 
-import org.onosproject.bgpio.exceptions.BgpParseException;
-import org.onosproject.bgpio.protocol.linkstate.BgpLinkLsNlriVer4;
-import org.onosproject.bgpio.protocol.linkstate.PathAttrNlriDetails;
+import org.onosproject.bgp.bgpio.exceptions.BgpParseException;
+import org.onosproject.bgp.bgpio.protocol.linkstate.BgpLinkLsNlriVer4;
+import org.onosproject.bgp.bgpio.protocol.linkstate.PathAttrNlriDetails;
 
 /**
  * Allows for providers interested in link events to be notified.

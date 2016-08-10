@@ -22,11 +22,11 @@ import org.jboss.netty.buffer.ChannelBuffer;
 import org.jboss.netty.channel.Channel;
 import org.jboss.netty.channel.ChannelHandlerContext;
 import org.jboss.netty.handler.codec.frame.FrameDecoder;
-import org.onosproject.bgpio.protocol.BgpMessage;
+import org.onosproject.bgp.bgpio.protocol.BgpMessage;
 import org.onlab.util.HexDump;
-import org.onosproject.bgpio.protocol.BgpFactories;
-import org.onosproject.bgpio.protocol.BgpMessageReader;
-import org.onosproject.bgpio.types.BgpHeader;
+import org.onosproject.bgp.bgpio.protocol.BgpFactories;
+import org.onosproject.bgp.bgpio.protocol.BgpMessageReader;
+import org.onosproject.bgp.bgpio.types.BgpHeader;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
