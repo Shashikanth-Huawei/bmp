@@ -83,7 +83,7 @@ public interface BgpPeer {
     void sendMessage(BgpMessage msg);
 
     /**
-     * Writes the BGPMessage list to the peer.
+     * Writes the BgpMessage list to the peer.
      *
      * @param msgs the messages to be written
      */

@@ -55,8 +55,8 @@ public class BgpPipelineFactory
         BgpChannelHandler handler = new BgpChannelHandler(bgpController);
 
         ChannelPipeline pipeline = Channels.pipeline();
-        pipeline.addLast("bgpmessagedecoder", new BgpMessageDecoder());
-        pipeline.addLast("bgpmessageencoder", new BgpMessageEncoder());
+        pipeline.addLast("BgpMessageDecoder", new BgpMessageDecoder());
+        pipeline.addLast("BgpMessageencoder", new BgpMessageEncoder());
         pipeline.addLast("holdTime", readTimeoutHandler);
         if (isBgpServ) {
             pipeline.addLast("PassiveHandler", handler);

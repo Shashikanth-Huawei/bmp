@@ -37,7 +37,7 @@ public class BgpMessageEncoder extends OneToOneEncoder {
 
     @Override
     protected Object encode(ChannelHandlerContext ctx, Channel channel, Object msg) throws Exception {
-        log.debug("BGPMessageEncoder::encode");
+        log.debug("BgpMessageEncoder::encode");
         if (!(msg instanceof List)) {
             log.debug("Invalid msg.");
             return msg;
