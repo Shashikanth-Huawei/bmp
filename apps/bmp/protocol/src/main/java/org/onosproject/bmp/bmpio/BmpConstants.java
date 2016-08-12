@@ -59,7 +59,7 @@ public final class BmpConstants {
     public static final int BMP_HEADER_MARKER_LENGTH = 16;
 
     /** BMP Header length. */
-    public static final int BMP_HEADER_LENGTH = 19;
+    public static final int BMP_HEADER_LENGTH = 6;
 
     /** BMP message maximum length. */
     public static final int BMP_MESSAGE_MAX_LENGTH = 4096;

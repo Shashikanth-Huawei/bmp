@@ -54,7 +54,7 @@ class BmpFrameDecoder extends FrameDecoder {
             return null;
         }
 
-        log.trace("BGP Peer: decode(): remoteAddr = {} localAddr = {} " +
+        log.trace("BMP peer: decode(): remoteAddr = {} localAddr = {} " +
                   "messageSize = {}",
                   ctx.getChannel().getRemoteAddress(),
                   ctx.getChannel().getLocalAddress(),
@@ -72,79 +72,30 @@ class BmpFrameDecoder extends FrameDecoder {
         //
         buf.markReaderIndex();
 
-        //
-        // Read and check the BGP message Marker field: it must be all ones
-        // (See RFC 4271, Section 4.1)
-        //
-        byte[] marker = new byte[BmpConstants.BMP_HEADER_MARKER_LENGTH];
-        buf.readBytes(marker);
-        for (int i = 0; i < marker.length; i++) {
-            if (marker[i] != (byte) 0xff) {
-                log.debug("BGP RX Error: invalid marker {} at position {}",
-                          marker[i], i);
-                //
-                // ERROR: Connection Not Synchronized
-                //
-                // Send NOTIFICATION and close the connection
-                int errorCode = BmpConstants.Notifications.MessageHeaderError.ERROR_CODE;
-                int errorSubcode =
-                    BmpConstants.Notifications.MessageHeaderError.CONNECTION_NOT_SYNCHRONIZED;
-                ChannelBuffer txMessage = null; /* =
-                    BmpNotification.prepareBmpNotification(errorCode,
-                                                           errorSubcode,
-                                                           null);*/
-                ctx.getChannel().write(txMessage);
-                bmpSession.closeSession(ctx);
-                return null;
-            }
-        }
+        if (buf.readableBytes() < BmpConstants.BMP_HEADER_LENGTH) {
+            log.debug("BMP RX Error: invalid header field. " +
+                              "must be atleast {}", BmpConstants.BMP_HEADER_LENGTH);
 
-        //
-        // Read and check the BGP message Length field
-        //
-        int length = buf.readUnsignedShort();
-        if ((length < BmpConstants.BMP_HEADER_LENGTH) ||
-            (length > BmpConstants.BMP_MESSAGE_MAX_LENGTH)) {
-            log.debug("BMP RX Error: invalid Length field {}. " +
-                      "must be between {} and {}",
-                      length,
-                      BmpConstants.BMP_HEADER_LENGTH,
-                      BmpConstants.BMP_MESSAGE_MAX_LENGTH);
-            //
-            // ERROR: Bad Message Length
-            //
-            // Send NOTIFICATION and close the connection
-            ChannelBuffer txMessage = null; /*
-                BmpNotification.prepareBmpNotificationBadMessageLength(length);*/
-            ctx.getChannel().write(txMessage);
-            bmpSession.closeSession(ctx);
+            //ctx.getChannel().write(txMessage);
+            //bmpSession.closeSession(ctx);
             return null;
         }
 
-        //
-        // Test whether the rest of the message is received:
-        // So far we have read the Marker (16 octets) and the
-        // Length (2 octets) fields.
-        //
-        int remainingMessageLen =
-            length - BmpConstants.BMP_HEADER_MARKER_LENGTH - 2;
-        if (buf.readableBytes() < remainingMessageLen) {
-            // No enough data received
-            buf.resetReaderIndex();
+        byte version = buf.readByte();
+        int msglength = buf.readInt();
+        byte msgType = buf.readByte();
+
+        if (buf.readableBytes() < msglength) {
+            log.debug("BMP RX Error: invalid Length field {}. ", msglength);
             return null;
         }
 
-        //
-        // Read the BGP message Type field, and process based on that type
-        //
-        int type = buf.readUnsignedByte();
-        remainingMessageLen--;      // Adjust after reading the type
-        ChannelBuffer message = buf.readBytes(remainingMessageLen);
+        /** TBD : Per-Peer Header */
 
         //
         // Process the remaining of the message based on the message type
         //
-        switch (type) {
+        switch (msgType) {
         case BmpConstants.BMP_ROUTE_MONITORING:
 
             break;
@@ -174,7 +125,7 @@ class BmpFrameDecoder extends FrameDecoder {
             int errorCode = BmpConstants.Notifications.MessageHeaderError.ERROR_CODE;
             int errorSubcode = BmpConstants.Notifications.MessageHeaderError.BAD_MESSAGE_TYPE;
             ChannelBuffer data = ChannelBuffers.buffer(1);
-            data.writeByte(type);
+            data.writeByte(msgType);
             ChannelBuffer txMessage = null; /* =
                 BmpNotification.prepareBmpNotification(errorCode, errorSubcode,
                                                        data);*/
