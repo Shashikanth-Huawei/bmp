@@ -38,7 +38,7 @@ final class BmpMessage {
     }
 
     /**
-     * Prepares BGP message.
+     * Prepares BMP message.
      *
      * @param type the BMP message type
      * @param payload the message payload to transmit (BMP header excluded)
@@ -67,11 +67,11 @@ final class BmpMessage {
     /**
      * An exception indicating a parsing error of the BMP message.
      */
-    static final class BgpParseException extends Exception {
+    static final class BmpParseException extends Exception {
         /**
          * Default constructor.
          */
-        private BgpParseException() {
+        private BmpParseException() {
             super();
         }
 
@@ -80,7 +80,7 @@ final class BmpMessage {
          *
          * @param message the message with the exception details
          */
-        BgpParseException(String message) {
+        BmpParseException(String message) {
             super(message);
         }
     }

@@ -21,7 +21,7 @@ import org.onlab.packet.Ip4Address;
 import java.net.SocketAddress;
 
 /**
- * Class for keeping information about a BGP session.
+ * Class for keeping information about a BMP session.
  *
  * There are two instances per each BMP peer session: one to keep the local
  * information about the BGP session, and another to keep information about
@@ -69,7 +69,7 @@ public class BmpSessionInfo {
     }
 
     /**
-     * Gets the BmP session BMP version: local or remote.
+     * Gets the BMP session BMP version: local or remote.
      *
      * @return the BMP session BMP version
      */

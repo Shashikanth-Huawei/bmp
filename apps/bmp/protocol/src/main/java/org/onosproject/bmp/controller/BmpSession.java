@@ -41,9 +41,9 @@ public class BmpSession extends SimpleChannelHandler {
     // It is used to avoid the Netty's asynchronous closing of a channel.
     private boolean isClosed = false;
 
-    // BGP session info: local and remote
-    private final BmpSessionInfo localInfo;     // BGP session local info
-    private final BmpSessionInfo remoteInfo;    // BGP session remote info
+    // BMP session info: local and remote
+    private final BmpSessionInfo localInfo;     // BMP session local info
+    private final BmpSessionInfo remoteInfo;    // BMP session remote info
 
     /**
      * Constructor for a given BMP session manager.
@@ -98,16 +98,16 @@ public class BmpSession extends SimpleChannelHandler {
     /**
      * Closes the session.
      *
-     * @param ctx the Channel Handler Context
+     * @param ctx the Channel handler context
      */
     void closeSession(ChannelHandlerContext ctx) {
         closeChannel(ctx);
     }
 
     /**
-     * Closes the Netty channel.
+     * Closes the netty channel.
      *
-     * @param ctx the Channel Handler Context
+     * @param ctx the channel handler context
      */
     void closeChannel(ChannelHandlerContext ctx) {
         isClosed = true;
@@ -143,10 +143,10 @@ public class BmpSession extends SimpleChannelHandler {
             remoteInfo.setIp4Address(Ip4Address.valueOf(inetAddr.getAddress()));
         }
 
-        log.debug("BGP Session Connected from {} on {}",
+        log.debug("BMP session connected from {} on {}",
                   remoteInfo.address(), localInfo.address());
         if (!bmpSessionManager.peerConnected(this)) {
-            log.debug("Cannot setup BGP Session Connection from {}. Closing...",
+            log.debug("Cannot setup BMP Session connection from {}. Closing...",
                       remoteInfo.address());
             ctx.getChannel().close();
         }
@@ -155,7 +155,7 @@ public class BmpSession extends SimpleChannelHandler {
     @Override
     public void channelDisconnected(ChannelHandlerContext ctx,
                                     ChannelStateEvent channelEvent) {
-        log.debug("BGP Session Disconnected from {} on {}",
+        log.debug("BMP session disconnected from {} on {}",
                   ctx.getChannel().getRemoteAddress(),
                   ctx.getChannel().getLocalAddress());
         processChannelDisconnected();
@@ -163,7 +163,7 @@ public class BmpSession extends SimpleChannelHandler {
 
     @Override
     public void exceptionCaught(ChannelHandlerContext ctx, ExceptionEvent e) {
-        log.debug("BGP Session Exception Caught from {} on {}: {}",
+        log.debug("BMP session exception caught from {} on {}: {}",
                   ctx.getChannel().getRemoteAddress(),
                   ctx.getChannel().getLocalAddress(),
                   e);
