@@ -46,16 +46,16 @@ final class BmpMessage {
      */
     static ChannelBuffer prepareBmpMessage(int type, ChannelBuffer payload) {
         ChannelBuffer message =
-            ChannelBuffers.buffer(BmpConstants.BGP_HEADER_LENGTH +
+            ChannelBuffers.buffer(BmpConstants.BMP_HEADER_LENGTH +
                                   payload.readableBytes());
 
         // Write the marker
-        for (int i = 0; i < BmpConstants.BGP_HEADER_MARKER_LENGTH; i++) {
+        for (int i = 0; i < BmpConstants.BMP_HEADER_MARKER_LENGTH; i++) {
             message.writeByte(0xff);
         }
 
         // Write the rest of the BGP header
-        message.writeShort(BmpConstants.BGP_HEADER_LENGTH +
+        message.writeShort(BmpConstants.BMP_HEADER_LENGTH +
                            payload.readableBytes());
         message.writeByte(type);
 

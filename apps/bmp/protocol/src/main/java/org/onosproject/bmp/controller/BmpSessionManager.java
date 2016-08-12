@@ -70,7 +70,7 @@ public class BmpSessionManager implements BmpInfoService {
     private ConcurrentMap<SocketAddress, BmpSession> bmpSessions =
             new ConcurrentHashMap<>();
 
-    private static final int DEFAULT_BGP_PORT = 2000;
+    private static final int DEFAULT_BMP_PORT = 3000;
     private int bgpPort;
 
     @Activate
@@ -98,10 +98,10 @@ public class BmpSessionManager implements BmpInfoService {
             if (strPort != null) {
                 bgpPort = Integer.parseInt(strPort);
             } else {
-                bgpPort = DEFAULT_BGP_PORT;
+                bgpPort = DEFAULT_BMP_PORT;
             }
         } catch (NumberFormatException | ClassCastException e) {
-            bgpPort = DEFAULT_BGP_PORT;
+            bgpPort = DEFAULT_BMP_PORT;
         }
         log.debug("BMP port is set to {}", bgpPort);
     }
@@ -214,7 +214,7 @@ public class BmpSessionManager implements BmpInfoService {
             serverChannel = serverBootstrap.bind(listenAddress);
             allChannels.add(serverChannel);
         } catch (ChannelException e) {
-            log.debug("Exception binding to BGP port {}: ",
+            log.debug("Exception binding to BMP port {}: ",
                       listenAddress.getPort(), e);
         }
     }

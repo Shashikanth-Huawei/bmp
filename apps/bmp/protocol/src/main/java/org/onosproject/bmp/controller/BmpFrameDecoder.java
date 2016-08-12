@@ -61,7 +61,7 @@ class BmpFrameDecoder extends FrameDecoder {
                   buf.readableBytes());
 
         // Test for minimum length of the BGP message
-        if (buf.readableBytes() < BmpConstants.BGP_HEADER_LENGTH) {
+        if (buf.readableBytes() < BmpConstants.BMP_HEADER_LENGTH) {
             // No enough data received
             return null;
         }
@@ -76,7 +76,7 @@ class BmpFrameDecoder extends FrameDecoder {
         // Read and check the BGP message Marker field: it must be all ones
         // (See RFC 4271, Section 4.1)
         //
-        byte[] marker = new byte[BmpConstants.BGP_HEADER_MARKER_LENGTH];
+        byte[] marker = new byte[BmpConstants.BMP_HEADER_MARKER_LENGTH];
         buf.readBytes(marker);
         for (int i = 0; i < marker.length; i++) {
             if (marker[i] != (byte) 0xff) {
@@ -103,13 +103,13 @@ class BmpFrameDecoder extends FrameDecoder {
         // Read and check the BGP message Length field
         //
         int length = buf.readUnsignedShort();
-        if ((length < BmpConstants.BGP_HEADER_LENGTH) ||
-            (length > BmpConstants.BGP_MESSAGE_MAX_LENGTH)) {
-            log.debug("BGP RX Error: invalid Length field {}. " +
-                      "Must be between {} and {}",
+        if ((length < BmpConstants.BMP_HEADER_LENGTH) ||
+            (length > BmpConstants.BMP_MESSAGE_MAX_LENGTH)) {
+            log.debug("BMP RX Error: invalid Length field {}. " +
+                      "must be between {} and {}",
                       length,
-                      BmpConstants.BGP_HEADER_LENGTH,
-                      BmpConstants.BGP_MESSAGE_MAX_LENGTH);
+                      BmpConstants.BMP_HEADER_LENGTH,
+                      BmpConstants.BMP_MESSAGE_MAX_LENGTH);
             //
             // ERROR: Bad Message Length
             //
@@ -127,7 +127,7 @@ class BmpFrameDecoder extends FrameDecoder {
         // Length (2 octets) fields.
         //
         int remainingMessageLen =
-            length - BmpConstants.BGP_HEADER_MARKER_LENGTH - 2;
+            length - BmpConstants.BMP_HEADER_MARKER_LENGTH - 2;
         if (buf.readableBytes() < remainingMessageLen) {
             // No enough data received
             buf.resetReaderIndex();
@@ -145,16 +145,25 @@ class BmpFrameDecoder extends FrameDecoder {
         // Process the remaining of the message based on the message type
         //
         switch (type) {
-        case BmpConstants.BGP_TYPE_OPEN:
+        case BmpConstants.BMP_ROUTE_MONITORING:
 
             break;
-        case BmpConstants.BGP_TYPE_UPDATE:
+        case BmpConstants.BMP_PEER_DOWN_NOTIFICATION:
 
             break;
-        case BmpConstants.BGP_TYPE_NOTIFICATION:
+        case BmpConstants.BMP_STATS_REPORTS:
 
             break;
-        case BmpConstants.BGP_TYPE_KEEPALIVE:
+        case BmpConstants.BMP_PEER_UP_NOTIFICATION:
+
+            break;
+        case BmpConstants.BMP_INITIATION:
+
+            break;
+        case BmpConstants.BMP_TERMINATION:
+
+            break;
+        case BmpConstants.BMP_ROUTE_MIRRORING:
 
             break;
         default:
