@@ -52,7 +52,7 @@ import static java.util.concurrent.Executors.newCachedThreadPool;
 import static org.onlab.util.Tools.groupedThreads;
 
 /**
- * BGP Session Manager class.
+ * BMP Session Manager class.
  */
 @Component(immediate = true, enabled = true)
 @Service
@@ -64,14 +64,13 @@ public class BmpSessionManager implements BmpInfoService {
     protected RouteAdminService routeService;
 
     boolean isShutdown = true;
-    private Channel serverChannel;     // Listener for incoming BGP connections
+    private Channel serverChannel;     // Listener for incoming BMP connections
     private ServerBootstrap serverBootstrap;
     private ChannelGroup allChannels = new DefaultChannelGroup();
-    private ConcurrentMap<SocketAddress, BmpSession> bmpSessions =
-            new ConcurrentHashMap<>();
+    private ConcurrentMap<SocketAddress, BmpSession> bmpSessions = new ConcurrentHashMap<>();
 
     private static final int DEFAULT_BMP_PORT = 3000;
-    private int bgpPort;
+    private int bmpPort;
 
     @Activate
     protected void activate(ComponentContext context) {
@@ -96,14 +95,14 @@ public class BmpSessionManager implements BmpInfoService {
         try {
             String strPort = (String) properties.get("bmpPort");
             if (strPort != null) {
-                bgpPort = Integer.parseInt(strPort);
+                bmpPort = Integer.parseInt(strPort);
             } else {
-                bgpPort = DEFAULT_BMP_PORT;
+                bmpPort = DEFAULT_BMP_PORT;
             }
         } catch (NumberFormatException | ClassCastException e) {
-            bgpPort = DEFAULT_BMP_PORT;
+            bmpPort = DEFAULT_BMP_PORT;
         }
-        log.debug("BMP port is set to {}", bgpPort);
+        log.debug("BMP port is set to {}", bmpPort);
     }
 
     @Modified
@@ -161,7 +160,7 @@ public class BmpSessionManager implements BmpInfoService {
 
         // Test whether there is already a session from the same remote
         if (bmpSessions.get(bmpSession.remoteInfo().address()) != null) {
-            return false;               // Duplicate BGP session
+            return false;               // Duplicate BMP session
         }
         bmpSessions.put(bmpSession.remoteInfo().address(), bmpSession);
 
@@ -189,21 +188,8 @@ public class BmpSessionManager implements BmpInfoService {
         ChannelFactory channelFactory = new NioServerSocketChannelFactory(
                 newCachedThreadPool(groupedThreads("onos/bmp", "sm-boss-%d", log)),
                 newCachedThreadPool(groupedThreads("onos/bmp", "sm-worker-%d", log)));
-        ChannelPipelineFactory pipelineFactory = () -> {
-            // Allocate a new session per connection
-            BmpSession bmpSessionHandler =
-                    new BmpSession(BmpSessionManager.this);
-            BmpFrameDecoder bmpFrameDecoder =
-                    new BmpFrameDecoder(bmpSessionHandler);
-
-            // Setup the processing pipeline
-            ChannelPipeline pipeline = Channels.pipeline();
-            pipeline.addLast("BmpFrameDecoder", bmpFrameDecoder);
-            pipeline.addLast("BmpSession", bmpSessionHandler);
-            return pipeline;
-        };
-        InetSocketAddress listenAddress =
-                new InetSocketAddress(bgpPort);
+        ChannelPipelineFactory pipelineFactory =  new BmpPipelineFactory(true);
+        InetSocketAddress listenAddress = new InetSocketAddress(bmpPort);
 
         serverBootstrap = new ServerBootstrap(channelFactory);
         // serverBootstrap.setOptions("reuseAddr", true);
