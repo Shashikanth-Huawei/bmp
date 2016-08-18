@@ -17,6 +17,14 @@
 package org.onosproject.bmp.bmpio.protocol.ver3;
 
 import org.jboss.netty.buffer.ChannelBuffer;
+import org.onosproject.bmp.bmpio.protocol.BmpType;
+import org.onosproject.bmp.bmpio.protocol.BmpMessageWriter;
+import org.onosproject.bmp.bmpio.types.BmpHeader;
+import org.onosproject.bmp.bmpio.protocol.BmpVersion;
+import com.google.common.base.MoreObjects;
+import com.google.common.base.MoreObjects.ToStringHelper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Implements BMP route monitor.
@@ -28,5 +36,61 @@ public class BmpRouteMirroringVer3 {
      */
     public BmpRouteMirroringVer3() {
 
+    }
+
+    public void writeTo(ChannelBuffer cb) {
+        WRITER.write(cb, this);
+    }
+
+    public BmpVersion getVersion() {
+        return BmpVersion.BMP_3;
+    }
+
+    public BmpType getMsgType() {
+        return MSG_TYPE;
+    }
+
+    public BmpHeader getHeader() {
+        return this.bmpMsgHeader;
+    }
+
+    public String toString() {
+        return MoreObjects.toStringHelper(this.getClass()).toString();
+    }
+
+    static class Writer implements BmpMessageWriter<BmpRouteMirroringVer3> {
+        Writer() {
+        }
+
+        public void write(ChannelBuffer cb, BmpRouteMirroringVer3 message) {
+            //cb.writeBytes(BmpRouteMonitoringVer3.marker, 0, 16);
+            //cb.writeShort(19);
+            //cb.writeByte(BgpKeepaliveMsgVer4.MSG_TYPE.getType());
+        }
+    }
+
+    static class Builder implements BmpRouteMirroring.Builder {
+        BmpHeader bmpMsgHeader;
+
+        Builder() {
+        }
+
+        public BmpRouteMirroringVer3.Builder setHeader(BmpHeader bmpMsgHeader) {
+            this.bmpMsgHeader = bmpMsgHeader;
+            return this;
+        }
+
+        public BmpRouteMirroring build() {
+            return new BmpRouteMirroringVer3();
+        }
+    }
+
+    static class Reader implements BmpMessageReader<BmpRouteMirroring> {
+        Reader() {
+        }
+
+        public BmpRouteMirroring readFrom(ChannelBuffer cb, BmpHeader bmpHeader) throws BmpParseException {
+            return new BmpRouteMirroringVer3();
+        }
     }
 }

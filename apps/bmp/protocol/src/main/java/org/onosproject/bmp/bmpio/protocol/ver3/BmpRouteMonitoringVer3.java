@@ -17,6 +17,14 @@
 package org.onosproject.bmp.bmpio.protocol.ver3;
 
 import org.jboss.netty.buffer.ChannelBuffer;
+import org.onosproject.bmp.bmpio.protocol.BmpType;
+import org.onosproject.bmp.bmpio.protocol.BmpMessageWriter;
+import org.onosproject.bmp.bmpio.types.BmpHeader;
+import org.onosproject.bmp.bmpio.protocol.BmpVersion;
+import com.google.common.base.MoreObjects;
+import com.google.common.base.MoreObjects.ToStringHelper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Implements BMP route monitor.
@@ -26,7 +34,7 @@ public class BmpRouteMonitoringVer3  implements BmpRouteMonitoring {
     private BmpHeader bmpMsgHeader;
     public static final byte PACKET_VERSION = 3;
     public static final int PACKET_MINIMUM_LENGTH = 6;
-    public static final BgpType MSG_TYPE;
+    public static final BmpType MSG_TYPE;
     /**
      * Default constructor to create a new exception.
      */
@@ -39,7 +47,7 @@ public class BmpRouteMonitoringVer3  implements BmpRouteMonitoring {
     }
 
     public BmpVersion getVersion() {
-        return BgpVersion.BGP_4;
+        return BmpVersion.BMP_3;
     }
 
     public BmpType getMsgType() {
@@ -65,7 +73,7 @@ public class BmpRouteMonitoringVer3  implements BmpRouteMonitoring {
         }
     }
 
-    static class Builder implements org.onosproject.bgp.bgpio.protocol.BmpRouteMonitoring.Builder {
+    static class Builder implements BmpRouteMonitoring.Builder {
         BmpHeader bmpMsgHeader;
 
         Builder() {

@@ -57,7 +57,7 @@ public class BmpPipelineFactory
         pipeline.addLast("BmpMessageDecoder", new BmpMessageDecoder());
         pipeline.addLast("BmpMessageencoder", new BmpMessageEncoder());
         //pipeline.addLast("holdTime", readTimeoutHandler);
-        if (isBgpServ) {
+        if (isBmpServ) {
             pipeline.addLast("PassiveHandler", handler);
         } else {
             pipeline.addLast("ActiveHandler", handler);

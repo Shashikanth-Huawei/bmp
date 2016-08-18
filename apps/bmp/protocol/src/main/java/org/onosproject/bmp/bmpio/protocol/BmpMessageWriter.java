@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package org.onosproject.bgp.bgpio.protocol;
+package org.onosproject.bmp.bmpio.protocol;
 
 import org.jboss.netty.buffer.ChannelBuffer;
 import org.onosproject.bmp.bmpio.exceptions.BmpParseException;

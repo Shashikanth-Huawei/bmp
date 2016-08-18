@@ -188,7 +188,7 @@ public class BmpSessionManager implements BmpInfoService {
         ChannelFactory channelFactory = new NioServerSocketChannelFactory(
                 newCachedThreadPool(groupedThreads("onos/bmp", "sm-boss-%d", log)),
                 newCachedThreadPool(groupedThreads("onos/bmp", "sm-worker-%d", log)));
-        ChannelPipelineFactory pipelineFactory =  new BmpPipelineFactory(true);
+        ChannelPipelineFactory pipelineFactory =  new BmpPipelineFactory(this, true);
         InetSocketAddress listenAddress = new InetSocketAddress(bmpPort);
 
         serverBootstrap = new ServerBootstrap(channelFactory);

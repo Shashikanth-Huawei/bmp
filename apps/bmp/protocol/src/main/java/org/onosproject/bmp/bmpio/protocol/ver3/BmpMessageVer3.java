@@ -51,8 +51,6 @@ public abstract class BmpMessageVer3 {
         @Override
         public BmpMessage readFrom(ChannelBuffer cb, BmpHeader bmpHeader)
                 throws BmpParseException {
-
-            // TODO:
             try {
                 switch (type) {
                 case BMP_ROUTE_MONITORINING:
